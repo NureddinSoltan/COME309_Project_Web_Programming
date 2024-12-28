@@ -1,6 +1,7 @@
 <?php
 require 'includes/auth.php';
 require 'includes/db.php';
+require 'includes/header.php';
 
 // Admin Stats
 if ($_SESSION['user_role'] === 'admin') {
@@ -13,6 +14,7 @@ if ($_SESSION['user_role'] === 'admin') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
@@ -21,11 +23,13 @@ if ($_SESSION['user_role'] === 'admin') {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+
         .stats {
             display: flex;
             justify-content: space-around;
             margin-bottom: 20px;
         }
+
         .stats div {
             background: #f4f4f4;
             padding: 20px;
@@ -33,13 +37,16 @@ if ($_SESSION['user_role'] === 'admin') {
             text-align: center;
             width: 200px;
         }
+
         .stats div h3 {
             margin: 0;
         }
+
         a {
             display: block;
             margin: 10px 0;
         }
+
         button {
             padding: 10px;
             margin-top: 10px;
@@ -49,11 +56,13 @@ if ($_SESSION['user_role'] === 'admin') {
             border-radius: 5px;
             cursor: pointer;
         }
+
         button:hover {
             background: #45a049;
         }
     </style>
 </head>
+
 <body>
     <h2>Welcome, <?= htmlspecialchars($_SESSION['username']) ?>!</h2>
 
@@ -76,10 +85,20 @@ if ($_SESSION['user_role'] === 'admin') {
                 <h3>Approved Books</h3>
                 <p><?= $approved_books ?></p>
             </div>
+            <?php
+            $rejected_books = $conn->query("SELECT COUNT(*) FROM books WHERE status = 'rejected'")->fetchColumn();
+            ?>
+            <div>
+                <h3>Rejected Books</h3>
+                <p><?= $rejected_books ?></p>
+            </div>
         </div>
         <a href="admin/manage_users.php"><button>Manage Users</button></a>
         <a href="admin/pending_books.php"><button>Manage Pending Books</button></a>
         <a href="admin/manage_comments.php"><button>Manage Comments</button></a>
+        <a href="admin/manage_users.php"><button>Manage Users</button></a>
+        <a href="admin/manage_books.php?status=rejected"><button>View Rejected Books</button></a>
+
     <?php else: ?>
         <h3>User Dashboard</h3>
         <a href="user/my_books.php"><button>My Books</button></a>
@@ -89,4 +108,5 @@ if ($_SESSION['user_role'] === 'admin') {
 
     <a href="logout.php"><button style="background: #e74c3c;">Logout</button></a>
 </body>
+
 </html>
