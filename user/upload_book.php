@@ -1,6 +1,7 @@
 <?php
 require '../includes/auth.php';
 require '../includes/db.php';
+require '../includes/alerts.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize Input
@@ -18,11 +19,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!is_dir($uploads_dir_books)) mkdir($uploads_dir_books, 0755, true);
     if (!is_dir($uploads_dir_images)) mkdir($uploads_dir_images, 0755, true);
 
-    // Handle File Uploads
+    // Validate File Types
+    $allowed_file_types = ['application/pdf'];
+    $allowed_image_types = ['image/jpeg', 'image/png', 'image/webp'];
+
+    $book_file_type = $_FILES['book_file']['type'];
+    $book_image_type = $_FILES['book_image']['type'];
+
+    if (!in_array($book_file_type, $allowed_file_types)) {
+        display_alert('❌ Invalid book file format. Only PDF is allowed.', 'error');
+        exit();
+    }
+
+    if (!in_array($book_image_type, $allowed_image_types)) {
+        display_alert('❌ Invalid image format. Only JPEG, PNG, and WEBP are allowed.', 'error');
+        exit();
+    }
+
+    // Normalize paths for cross-platform compatibility
     $book_file_path = 'assets/uploads/books/' . basename($_FILES['book_file']['name']);
     $book_image_path = 'assets/uploads/images/' . basename($_FILES['book_image']['name']);
 
-    // Normalize paths (replace backslashes with forward slashes)
     $book_file_path = str_replace('\\', '/', $book_file_path);
     $book_image_path = str_replace('\\', '/', $book_image_path);
 
@@ -53,12 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $uploaded_by
             ]);
 
-            echo "✅ Book uploaded successfully! Pending admin approval.";
+            display_alert('✅ Book uploaded successfully! Pending admin approval.', 'success');
         } catch (PDOException $e) {
-            echo "❌ Database Error: " . $e->getMessage();
+            display_alert('❌ Database Error: ' . $e->getMessage(), 'error');
         }
     } else {
-        echo "❌ Failed to upload files. Please check file permissions.";
+        display_alert('❌ Failed to upload files. Please check file permissions.', 'error');
     }
 }
 ?>
@@ -69,6 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Book</title>
+    <!-- <link rel="stylesheet" href="../assets/css/upload_book.css"> -->
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -94,6 +113,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         form button:hover {
             background: #45a049;
+        }
+        .alert {
+            margin: 10px auto;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .alert.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .alert.error {
+            background-color: #f8d7da;
+            color: #721c24;
         }
     </style>
 </head>
