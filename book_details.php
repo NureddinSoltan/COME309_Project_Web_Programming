@@ -1,6 +1,7 @@
 <?php
 require 'includes/auth.php';
 require 'includes/db.php';
+require 'includes/header.php';
 
 // Ensure a valid book ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -60,6 +61,9 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Book Details</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/includes/header.css">
+
     <style>
         .comment-form textarea {
             width: 100%;
