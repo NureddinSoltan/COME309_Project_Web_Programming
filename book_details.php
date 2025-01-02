@@ -21,10 +21,12 @@ if (!$book) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Book Details</title>
 </head>
+
 <body>
     <h2>Book Details</h2>
     <p><strong>Title:</strong> <?= htmlspecialchars($book['title']) ?></p>
@@ -32,6 +34,10 @@ if (!$book) {
     <p><strong>Description:</strong> <?= htmlspecialchars($book['description']) ?></p>
     <p><strong>Price:</strong> $<?= htmlspecialchars($book['price']) ?></p>
     <p><strong>Status:</strong> <?= htmlspecialchars($book['status']) ?></p>
+    <p><strong>Category:</strong> <?= htmlspecialchars($book['category']) ?></p>
+    <p><strong>Language:</strong> <?= htmlspecialchars($book['language']) ?></p>
+    <p><strong>Pages:</strong> <?= htmlspecialchars($book['pages']) ?></p>
+    <p><strong>Price:</strong> $<?= htmlspecialchars($book['price']) ?></p>
 
     <?php if (!empty($book['book_image'])): ?>
         <p><strong>Cover Image:</strong></p>
@@ -41,16 +47,16 @@ if (!$book) {
     <?php endif; ?>
 
     <?php if (!empty($book['book_file'])): ?>
-    <p><strong>Download Book:</strong></p>
-    <a href="<?= htmlspecialchars($book['book_file']) ?>" download>
-        📥 Click here to download the book
-    </a>
-    <?php if (!file_exists($book['book_file'])): ?>
-        <p style="color: red;">❌ File not found on the server.</p>
+        <p><strong>Download Book:</strong></p>
+        <a href="<?= htmlspecialchars($book['book_file']) ?>" download>
+            📥 Click here to download the book
+        </a>
+        <?php if (!file_exists($book['book_file'])): ?>
+            <p style="color: red;">❌ File not found on the server.</p>
+        <?php endif; ?>
+    <?php else: ?>
+        <p><em>No book file available for download.</em></p>
     <?php endif; ?>
-<?php else: ?>
-    <p><em>No book file available for download.</em></p>
-<?php endif; ?>
 
 
     <h3>Comments</h3>
@@ -76,7 +82,7 @@ if (!$book) {
         <?php foreach ($comments as $comment): ?>
             <li>
                 <strong><?= htmlspecialchars($comment['username']) ?>:</strong>
-                <?= htmlspecialchars($comment['comment']) ?> 
+                <?= htmlspecialchars($comment['comment']) ?>
                 <small>(<?= htmlspecialchars($comment['created_at']) ?>)</small>
             </li>
         <?php endforeach; ?>
@@ -84,4 +90,5 @@ if (!$book) {
 
     <a href="books.php">Back to Books</a>
 </body>
+
 </html>

@@ -45,11 +45,13 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Manage Books</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
+
 <body>
     <h2>Manage Books</h2>
 
@@ -66,6 +68,10 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
             <th>Title</th>
             <th>Author</th>
+            <th>Category</th>
+            <th>Language</th>
+            <th>Pages</th>
+            <th>Price</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -73,24 +79,22 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <tr>
                 <td><a href="../book_details.php?id=<?= $book['id'] ?>"><?= htmlspecialchars($book['title']) ?></a></td>
                 <td><?= htmlspecialchars($book['author']) ?></td>
+                <td><?= htmlspecialchars($book['category']) ?></td>
+                <td><?= htmlspecialchars($book['language']) ?></td>
+                <td><?= htmlspecialchars($book['pages']) ?></td>
+                <td>$<?= htmlspecialchars($book['price']) ?></td>
                 <td><?= htmlspecialchars($book['status']) ?></td>
                 <td>
-                    <form method="POST" style="display: inline;">
+                    <a href="../user/edit_book.php?id=<?= $book['id'] ?>">✏️ Edit</a>
+                    <form method="POST" style="display:inline;">
                         <input type="hidden" name="book_id" value="<?= $book['id'] ?>">
                         <button type="submit" name="action" value="delete">🗑️ Delete</button>
                     </form>
-                    <a href="../user/edit_book.php?id=<?= $book['id'] ?>">✏️ Edit</a>
-                    <?php if ($book['status'] === 'pending'): ?>
-                        <form method="POST">
-                            <input type="hidden" name="book_id" value="<?= $book['id'] ?>">
-                            <button type="submit" name="action" value="approve">✅ Approve</button>
-                            <button type="submit" name="action" value="reject">❌ Reject</button>
-                        </form>
-                    <?php endif; ?>
                 </td>
             </tr>
         <?php endforeach; ?>
     </table>
     <a href="../dashboard.php">⬅️ Back to Dashboard</a>
 </body>
+
 </html>
