@@ -1,6 +1,7 @@
 <?php
 require 'includes/db.php';
 require 'includes/header.php';
+require 'includes/header.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = htmlspecialchars($_POST['username']);

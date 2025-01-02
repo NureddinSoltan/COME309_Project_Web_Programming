@@ -1,6 +1,8 @@
+
 <?php
 require '../includes/auth.php';
 require '../includes/db.php';
+require '../includes/header.php';
 
 if ($_SESSION['user_role'] !== 'admin') {
     die('❌ Unauthorized Access');
@@ -49,14 +51,14 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Manage Books</title>
     <link rel="stylesheet" href="../assets/css/includes/header.css">
-    <!-- <link rel="stylesheet" href="../assets/css/user/upload_book.css"> -->
+    <link rel="stylesheet" href="../assets/css/admin/manage_books.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
 <body>
-    <h2>Manage Books</h2>
-
-    <form method="GET">
+    <div class="manage-books-container">
+        <h2>📚 Manage Books</h2>
+        <form method="GET">
         <select name="status" onchange="this.form.submit()">
             <option value="all">All</option>
             <option value="approved" <?= $status === 'approved' ? 'selected' : '' ?>>Approved</option>
@@ -115,6 +117,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </tr>
         <?php endforeach; ?>
     </table>
-    <a href="../dashboard.php">⬅️ Back to Dashboard</a>
+    </div>
+    <a href="../dashboard.php" class="back-link">⬅️ Back to Dashboard</a>
 </body>
 </html>
