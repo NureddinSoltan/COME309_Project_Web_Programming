@@ -43,25 +43,37 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Manage Users</title>
     <link rel="stylesheet" href="../assets/css/includes/header.css">
-    <!-- <link rel="stylesheet" href="../assets/css/admin/manage_books.css"> -->
+    <link rel="stylesheet" href="../assets/css/admin/manage_books.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
 <body>
-    <h2>Manage Users</h2>
-
+<div class="manage-users-container">
+<h2>👤 Manage Users</h2>
     <!-- Add User Form -->
     <h3>Add User</h3>
     <form method="POST">
+    <div class="form-group">
+        <label>Username:</label>
         <input type="text" name="username" placeholder="Username" required>
+    </div>
+    <div class="form-group">
+        <label>Email:</label>
         <input type="email" name="email" placeholder="Email" required>
+    </div>
+    <div class="form-group">
+        <label>Password:</label>
         <input type="password" name="password" placeholder="Password" required>
+    </div>
+    <div class="form-group">
+        <label>Role:</label>
         <select name="role">
             <option value="user">User</option>
             <option value="admin">Admin</option>
         </select>
-        <button type="submit" name="add_user">Add User</button>
-    </form>
+    </div>
+    <button type="submit" name="add_user">Add User</button>
+</form>
 
     <!-- User List -->
     <h3>All Users</h3>
