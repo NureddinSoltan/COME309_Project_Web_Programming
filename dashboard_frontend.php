@@ -19,25 +19,13 @@ if ($_SESSION['user_role'] === 'admin') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Library Management System</title>
+    <link rel="stylesheet" href="assets/css/includes/header.css">
     <link rel="stylesheet" href="assets/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="nav-brand">
-            <a href="landing.php">
-                <i class="fas fa-book-reader"></i>
-                <span>Library System</span>
-            </a>
-        </div>
-        <div class="nav-user">
-            <span>Welcome, <?= htmlspecialchars($_SESSION['username']) ?></span>
-            <a href="logout.php" class="logout-btn">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-        </div>
-    </nav>
+
 
     <div class="container">
         <?php if ($_SESSION['user_role'] === 'admin'): ?>
