@@ -1,5 +1,7 @@
 <?php
 require 'includes/db.php';
+require 'includes/header.php';
+
 session_start();
 
 // Redirect if not logged in
@@ -51,7 +53,9 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title>Library - Explore Books</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/includes/header.css">
+
     <style>
         .filter-form {
             display: flex;
