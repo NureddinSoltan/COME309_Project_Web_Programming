@@ -39,8 +39,8 @@ $base_url = (strpos($_SERVER['REQUEST_URI'], '/admin/') !== false) ? '../' : $ba
             <a href="<?= $base_url ?>login.php" class="nav-btn">
                 <i class="fas fa-sign-in-alt"></i> Login
             </a>
-            <a href="<?= $base_url ?>signup.php" class="nav-btn">
-                <i class="fas fa-user-plus"></i> Sign Up
+            <a href="<?= $base_url ?>register.php" class="nav-btn">
+                <i class="fas fa-user-plus"></i> Register
             </a>
         <?php endif; ?>
     </div>
