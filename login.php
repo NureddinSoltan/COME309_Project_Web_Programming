@@ -27,25 +27,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/includes/header.css">
-
     <title>Login</title>
+    <link rel="stylesheet" href="assets/css/includes/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
+
 <body>
-    <h2>User Login</h2>
-    <form method="POST">
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br>
-        
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br>
-        
-        <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="register.php">Register here</a></p>
+    <div class="login-container">
+        <h2>🔐 User Login</h2>
+        <form method="POST">
+            <label>Email:</label>
+            <input type="email" name="email" required>
+            
+            <label>Password:</label>
+            <input type="password" name="password" required>
+            
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="register.php">Register here</a></p>
+    </div>
 </body>
+
 </html>
