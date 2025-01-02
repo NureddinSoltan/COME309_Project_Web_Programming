@@ -94,10 +94,10 @@ if ($_SESSION['user_role'] === 'admin') {
             </div>
         </div>
         <a href="admin/manage_users.php"><button>Manage Users</button></a>
+        <a href="admin/manage_books.php?status=rejected"><button>View Rejected Books</button></a>
         <a href="admin/pending_books.php"><button>Manage Pending Books</button></a>
         <a href="admin/manage_comments.php"><button>Manage Comments</button></a>
         <a href="admin/manage_users.php"><button>Manage Users</button></a>
-        <a href="admin/manage_books.php?status=rejected"><button>View Rejected Books</button></a>
 
     <?php else: ?>
         <h3>User Dashboard</h3>
