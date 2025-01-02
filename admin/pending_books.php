@@ -7,6 +7,10 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     die('❌ Unauthorized Access. Only admin can access this page.');
 }
 
+// $stmt = $conn->prepare("SELECT * FROM books WHERE status = 'pending'");
+// $stmt->execute();
+// $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 $stmt = $conn->prepare("SELECT * FROM books WHERE status = 'pending'");
 $stmt->execute();
 $books = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -1,35 +1,57 @@
 <?php
 require '../includes/auth.php';
 require '../includes/db.php';
+require '../includes/alerts.php';
 
-if (!isset($_GET['id'])) {
+// Validate Book ID
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die('❌ Invalid Book ID');
 }
 
-$book_id = $_GET['id'];
+$book_id = intval($_GET['id']);
 $user_id = $_SESSION['user_id'];
+$user_role = $_SESSION['user_role'];
 
-// Fetch the book to ensure it belongs to the logged-in user
-$stmt = $conn->prepare("SELECT * FROM books WHERE id = ? AND uploaded_by = ?");
-$stmt->execute([$book_id, $user_id]);
+// Fetch the book
+if ($user_role === 'admin') {
+    // Admin can access any book
+    $stmt = $conn->prepare("SELECT * FROM books WHERE id = ?");
+    $stmt->execute([$book_id]);
+} else {
+    // Normal user can only access their own books
+    $stmt = $conn->prepare("SELECT * FROM books WHERE id = ? AND uploaded_by = ?");
+    $stmt->execute([$book_id, $user_id]);
+}
+
 $book = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$book) {
     die('❌ Unauthorized Access or Book Not Found');
 }
 
-// Handle form submission for editing
+// Handle Form Submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = htmlspecialchars($_POST['title']);
     $author = htmlspecialchars($_POST['author']);
     $description = htmlspecialchars($_POST['description']);
     $price = floatval($_POST['price']);
 
-    $stmt = $conn->prepare("UPDATE books SET title = ?, author = ?, description = ?, price = ? WHERE id = ?");
+    // Update book details and set status to 'pending'
+    $stmt = $conn->prepare("
+        UPDATE books 
+        SET title = ?, author = ?, description = ?, price = ?, status = 'pending'
+        WHERE id = ?
+    ");
     $stmt->execute([$title, $author, $description, $price, $book_id]);
 
-    echo "✅ Book updated successfully!";
-    header('Refresh: 1; URL=my_books.php');
+    display_alert('✅ Book updated successfully! It is now pending admin approval.', 'success');
+
+    // Redirect based on user role
+    if ($user_role === 'admin') {
+        header('Location: ../admin/manage_books.php');
+    } else {
+        header('Location: my_books.php');
+    }
     exit();
 }
 ?>
@@ -39,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Edit Book</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
     <h2>Edit Book</h2>
@@ -57,6 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <button type="submit">Save Changes</button>
     </form>
-    <a href="my_books.php">Back to My Books</a>
+    <a href="<?= $user_role === 'admin' ? '../admin/manage_books.php' : 'my_books.php' ?>">⬅️ Back</a>
 </body>
 </html>
