@@ -1,0 +1,149 @@
+/* General Reset */
+body, h1, h2, h3, p, ul, ol, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9fafb;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #4f46e5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+    padding: 10px 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.nav-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+/* Header */
+.main {
+    margin-top: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    color: #1f2937;
+}
+
+.status-badge {
+    background-color: #fef3c7;
+    color: #b45309;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Table */
+.table-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #f3f4f6;
+}
+
+thead th {
+    text-align: left;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+tbody td {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    color: #374151;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background-color: #f3f4f6;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.approve {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.approve:hover {
+    background-color: #a7f3d0;
+}
+
+.reject {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.reject:hover {
+    background-color: #fecaca;
+}
