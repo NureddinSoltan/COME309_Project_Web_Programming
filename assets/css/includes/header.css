@@ -1,4 +1,4 @@
-/* Base Styles */
+/* Variables */
 :root {
     --primary-color: #4a90e2;
     --secondary-color: #5c6ac4;
@@ -12,6 +12,7 @@
     --transition: all 0.3s ease;
 }
 
+/* Reset & Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -25,7 +26,6 @@ body {
     background-color: #f8f9fa;
 }
 
-
 /* Navigation */
 .navbar {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -37,6 +37,7 @@ body {
     box-shadow: var(--shadow);
 }
 
+/* Navbar Brand */
 .nav-brand {
     display: flex;
     align-items: center;
@@ -45,21 +46,71 @@ body {
     font-weight: bold;
 }
 
+.nav-brand a {
+    color: var(--white);
+    text-decoration: none; /* Remove underline */
+    transition: var(--transition);
+}
+
+.nav-brand a:hover {
+    text-decoration: none; /* Ensure no underline appears on hover */
+    color: var(--white); /* Maintain original color on hover */
+}
+
+/* Navbar User Section */
 .nav-user {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
+.nav-user span {
+    font-weight: 500;
+}
+
+/* Navbar Buttons (Logout) */
 .logout-btn {
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--white);
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    text-decoration: none;
+    text-decoration: none; /* Remove underline */
     transition: var(--transition);
 }
 
 .logout-btn:hover {
     background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none; /* Ensure underline doesn't appear */
+    color: var(--white); /* Maintain original color */
+}
+
+/* General Navbar Links */
+.nav-user a {
+    text-decoration: none; /* Remove underline */
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.nav-user a:hover {
+    text-decoration: none; /* Disable underline on hover */
+    color: var(--white); /* Maintain original color on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .nav-user {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .logout-btn {
+        width: 100%;
+        text-align: center;
+    }
 }
