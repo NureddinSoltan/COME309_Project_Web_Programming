@@ -1,6 +1,7 @@
 <?php
 require '../includes/auth.php';
 require '../includes/db.php';
+require '../includes/header.php';
 
 // Ensure only admin can access
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
@@ -37,6 +38,9 @@ if (isset($_POST['action']) && isset($_POST['book_id'])) {
 <head>
     <meta charset="UTF-8">
     <title>Pending Books</title>
+    <link rel="stylesheet" href="../assets/css/includes/header.css">
+    <!-- <link rel="stylesheet" href="../assets/css/admin/manage_books.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <h2>Pending Books</h2>
