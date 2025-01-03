@@ -131,7 +131,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <?= htmlspecialchars($book['language']) ?>
                                     </p>
                                 </div>
-                                <a href="book_details.php?id=<?= $book['id'] ?>" class="view-details-btn">
+                                <a href="book_details_frontend.php?id=<?= $book['id'] ?>" class="view-details-btn">
                                     <i class="fas fa-info-circle"></i> View Details
                                 </a>
                             </div>

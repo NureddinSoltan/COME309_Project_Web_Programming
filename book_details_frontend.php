@@ -124,7 +124,7 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Back to Books -->
         <div class="back-link">
-            <a href="books.php">
+            <a href="books_frontend.php">
                 ⬅️ Back to Books
             </a>
         </div>
