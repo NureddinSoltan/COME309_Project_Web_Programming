@@ -1,6 +1,7 @@
 <?php
 require '../includes/auth.php';
 require '../includes/db.php';
+require '../includes/header.php';
 
 $user_id = $_SESSION['user_id'];
 
@@ -15,7 +16,9 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title>My Uploaded Books</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/includes/header.css">
+    <link rel="stylesheet" href="../assets/css/admin/pending_books.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <h2>My Uploaded Books</h2>
