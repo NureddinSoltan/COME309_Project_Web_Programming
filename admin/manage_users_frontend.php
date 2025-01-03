@@ -43,7 +43,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Manage Users</title>
     <link rel="stylesheet" href="../assets/css/includes/header.css">
-    <link rel="stylesheet" href="../assets/css/admin/manage_books.css">
+    <link rel="stylesheet" href="../assets/css/admin/manage_users.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
