@@ -33,7 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment'])) {
             ");
             $stmt->execute([$book_id, $user_id, $comment]);
 
-            echo "<p style='color: green;'>✅ Comment added successfully!</p>";
+            // Redirect to avoid resubmission on page reload
+            header("Location: book_details_frontend.php?id=$book_id&comment=success");
+            exit();
         } catch (PDOException $e) {
             echo "<p style='color: red;'>❌ Error: " . $e->getMessage() . "</p>";
         }
@@ -53,6 +55,7 @@ $stmt = $conn->prepare("
 $stmt->execute([$book_id]);
 $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -97,12 +100,16 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Add Comment Section -->
         <section class="comment-section">
-            <h3>💬 Add a Comment</h3>
-            <form method="POST" class="comment-form">
-                <textarea name="comment" placeholder="Write your comment here..." required></textarea><br>
-                <button type="submit">Add Comment</button>
-            </form>
-        </section>
+    <h3>💬 Add a Comment</h3>
+    <?php if (isset($_GET['comment']) && $_GET['comment'] === 'success'): ?>
+        <p style="color: green;">✅ Comment added successfully!</p>
+    <?php endif; ?>
+    <form method="POST" class="comment-form">
+        <textarea name="comment" placeholder="Write your comment here..." required></textarea><br>
+        <button type="submit">Add Comment</button>
+    </form>
+</section>
+
 
         <!-- Display Comments Section -->
         <section class="comments-list-section">
