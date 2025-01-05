@@ -4,81 +4,46 @@ require '../includes/db.php';
 require '../includes/alerts.php';
 require '../includes/header.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Sanitize Input
     $title = htmlspecialchars($_POST['title']);
     $author = htmlspecialchars($_POST['author']);
     $description = htmlspecialchars($_POST['description']);
     $price = floatval($_POST['price']);
+    $category = htmlspecialchars($_POST['category']);
+    $language = htmlspecialchars($_POST['language']);
+    $pages = intval($_POST['pages']);
     $uploaded_by = $_SESSION['user_id'];
 
-    // File Upload Directories
     $uploads_dir_books = __DIR__ . '/../assets/uploads/books/';
     $uploads_dir_images = __DIR__ . '/../assets/uploads/images/';
 
-    // Ensure directories exist
     if (!is_dir($uploads_dir_books)) mkdir($uploads_dir_books, 0755, true);
     if (!is_dir($uploads_dir_images)) mkdir($uploads_dir_images, 0755, true);
 
-    // Validate File Types
-    $allowed_file_types = ['application/pdf'];
-    $allowed_image_types = ['image/jpeg', 'image/png', 'image/webp'];
-
-    $book_file_type = $_FILES['book_file']['type'];
-    $book_image_type = $_FILES['book_image']['type'];
-
-    if (!in_array($book_file_type, $allowed_file_types)) {
-        display_alert('❌ Invalid book file format. Only PDF is allowed.', 'error');
-        exit();
-    }
-
-    if (!in_array($book_image_type, $allowed_image_types)) {
-        display_alert('❌ Invalid image format. Only JPEG, PNG, and WEBP are allowed.', 'error');
-        exit();
-    }
-
-    // Normalize paths for cross-platform compatibility
     $book_file_path = 'assets/uploads/books/' . basename($_FILES['book_file']['name']);
     $book_image_path = 'assets/uploads/images/' . basename($_FILES['book_image']['name']);
 
-    $book_file_path = str_replace('\\', '/', $book_file_path);
-    $book_image_path = str_replace('\\', '/', $book_image_path);
+    move_uploaded_file($_FILES['book_file']['tmp_name'], $uploads_dir_books . basename($_FILES['book_file']['name']));
+    move_uploaded_file($_FILES['book_image']['tmp_name'], $uploads_dir_images . basename($_FILES['book_image']['name']));
 
-    // Move Uploaded Files
-    $book_file_uploaded = move_uploaded_file(
-        $_FILES['book_file']['tmp_name'],
-        $uploads_dir_books . basename($_FILES['book_file']['name'])
-    );
+    $stmt = $conn->prepare("
+        INSERT INTO books (title, author, description, book_file, book_image, price, category, language, pages, uploaded_by, status) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')
+    ");
+    $stmt->execute([
+        $title,
+        $author,
+        $description,
+        $book_file_path,
+        $book_image_path,
+        $price,
+        $category,
+        $language,
+        $pages,
+        $uploaded_by
+    ]);
 
-    $book_image_uploaded = move_uploaded_file(
-        $_FILES['book_image']['tmp_name'],
-        $uploads_dir_images . basename($_FILES['book_image']['name'])
-    );
-
-    if ($book_file_uploaded && $book_image_uploaded) {
-        try {
-            $stmt = $conn->prepare("
-                INSERT INTO books (title, author, description, book_file, book_image, price, uploaded_by, status) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')
-            ");
-            $stmt->execute([
-                $title,
-                $author,
-                $description,
-                $book_file_path,
-                $book_image_path,
-                $price,
-                $uploaded_by
-            ]);
-
-            display_alert('✅ Book uploaded successfully! Pending admin approval.', 'success');
-        } catch (PDOException $e) {
-            display_alert('❌ Database Error: ' . $e->getMessage(), 'error');
-        }
-    } else {
-        display_alert('❌ Failed to upload files. Please check file permissions.', 'error');
-    }
+    display_alert('✅ Book uploaded successfully! Pending admin approval.', 'success');
 }
 ?>
 
