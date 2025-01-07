@@ -8,19 +8,17 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     die('❌ Unauthorized Access. Only admin can access this page.');
 }
 
-// $stmt = $conn->prepare("SELECT * FROM books WHERE status = 'pending'");
-// $stmt->execute();
-// $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+// Fetch all books with a status of 'pending'
 $stmt = $conn->prepare("SELECT * FROM books WHERE status = 'pending'");
 $stmt->execute();
-$books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$books = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetches all rows as an associative array.
 
 // Handle Approval/Rejection
 if (isset($_POST['action']) && isset($_POST['book_id'])) {
-    $action = $_POST['action'];
-    $book_id = $_POST['book_id'];
+    $action = $_POST['action']; // Get the action (approve or reject)
+    $book_id = $_POST['book_id']; // Get the book ID
 
+    // Check if the action is valid (either 'approved' or 'rejected')
     if (in_array($action, ['approved', 'rejected'])) {
         $stmt = $conn->prepare("UPDATE books SET status = ? WHERE id = ?");
         $stmt->execute([$action, $book_id]);
@@ -35,6 +33,7 @@ if (isset($_POST['action']) && isset($_POST['book_id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Pending Books</title>
@@ -42,6 +41,7 @@ if (isset($_POST['action']) && isset($_POST['book_id'])) {
     <link rel="stylesheet" href="../assets/css/admin/pending_books.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <div class="pending-books-container">
         <h2>📚 Pending Books</h2>
@@ -74,4 +74,3 @@ if (isset($_POST['action']) && isset($_POST['book_id'])) {
 </body>
 
 </html>
-

@@ -6,7 +6,7 @@ if ($_SESSION['user_role'] !== 'admin') {
     die('❌ Unauthorized Access');
 }
 
-// Fetch all comments
+// Fetch all comments with user and book details
 $stmt = $conn->prepare("
     SELECT comments.id, comments.comment, comments.created_at, users.username, books.title AS book_title
     FROM comments
@@ -30,10 +30,12 @@ if (isset($_POST['delete_comment'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Manage Comments</title>
 </head>
+
 <body>
     <h2>Manage Comments</h2>
     <table border="1">
@@ -61,4 +63,5 @@ if (isset($_POST['delete_comment'])) {
     </table>
     <a href="../dashboard.php">Back to Dashboard</a>
 </body>
+
 </html>

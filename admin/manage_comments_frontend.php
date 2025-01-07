@@ -8,7 +8,7 @@ if ($_SESSION['user_role'] !== 'admin') {
     die('❌ Unauthorized Access');
 }
 
-// Fetch all comments
+// Fetch all comments with user and book details
 $stmt = $conn->prepare("
     SELECT comments.id, comments.comment, comments.created_at, users.username, books.title AS book_title
     FROM comments
@@ -32,13 +32,14 @@ if (isset($_POST['delete_comment'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Manage Comments</title>
     <link rel="stylesheet" href="../assets/css/includes/header.css">
     <link rel="stylesheet" href="../assets/css/admin/manage_comments.css">
 
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
