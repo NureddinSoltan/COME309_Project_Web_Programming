@@ -1,24 +1,30 @@
 <?php
+// Include the database connection file and header file
 require 'includes/db.php';
 require 'includes/header.php';
 
+// Start a session to store user data
 session_start();
 
+// Check if the form is submitted using the POST method
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = htmlspecialchars($_POST['email']);
+    $email = htmlspecialchars($_POST['email']); // XSS attacks
     $password = $_POST['password'];
 
+    // Prepare a SQL query to fetch the user with the provided email
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->execute([$email]);
+    $stmt->execute([$email]); // SQL injection attacks.
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    // Check if the user exists and the password is correct
     if ($user && password_verify($password, $user['password'])) {
+        // Store user data in the session for later use
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_role'] = $user['role'];
         $_SESSION['username'] = $user['username'];
         
         echo "✅ Login successful! Redirecting...";
-        header('Refresh: 2; URL=dashboard_frontend.php');
+        header('Refresh: 2; URL=dashboard_frontend.php'); // Redirect the user to the dashboard after 2 seconds
     } else {
         echo "❌ Invalid email or password!";
     }

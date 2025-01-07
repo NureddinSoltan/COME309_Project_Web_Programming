@@ -5,8 +5,10 @@ require 'includes/header.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = htmlspecialchars($_POST['username']);
     $email = htmlspecialchars($_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    // Hash the password for secure storage in the database
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // The PASSWORD_DEFAULT algorithm ensures the password is securely hashed.
     
+    // Use a try-catch block to handle potential database errors
     try {
         $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
         $stmt->execute([$username, $email, $password]);
