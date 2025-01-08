@@ -4,7 +4,9 @@ require '../includes/db.php';
 require '../includes/alerts.php';
 require '../includes/header.php';
 
+// Handling Form Submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Sanitize user inputs to prevent XSS attacks
     $title = htmlspecialchars($_POST['title']);
     $author = htmlspecialchars($_POST['author']);
     $description = htmlspecialchars($_POST['description']);
@@ -14,18 +16,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pages = intval($_POST['pages']);
     $uploaded_by = $_SESSION['user_id'];
 
+    // Define directories for storing uploaded files
     $uploads_dir_books = __DIR__ . '/../assets/uploads/books/';
     $uploads_dir_images = __DIR__ . '/../assets/uploads/images/';
 
+    // Creates the upload directories if they don’t already exist.
     if (!is_dir($uploads_dir_books)) mkdir($uploads_dir_books, 0755, true);
     if (!is_dir($uploads_dir_images)) mkdir($uploads_dir_images, 0755, true);
 
+    // Extracts the file name from the uploaded file.
     $book_file_path = 'assets/uploads/books/' . basename($_FILES['book_file']['name']);
     $book_image_path = 'assets/uploads/images/' . basename($_FILES['book_image']['name']);
 
+    // Moves the uploaded files to the appropriate directories.
     move_uploaded_file($_FILES['book_file']['tmp_name'], $uploads_dir_books . basename($_FILES['book_file']['name']));
     move_uploaded_file($_FILES['book_image']['tmp_name'], $uploads_dir_images . basename($_FILES['book_image']['name']));
 
+    // Saving Book Details to the Database
     $stmt = $conn->prepare("
         INSERT INTO books (title, author, description, book_file, book_image, price, category, language, pages, uploaded_by, status) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')

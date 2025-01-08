@@ -5,7 +5,7 @@ require '../includes/header.php';
 
 $user_id = $_SESSION['user_id'];
 
-// Fetch user's books
+// Fetch all books uploaded by the logged-in user
 $stmt = $conn->prepare("SELECT * FROM books WHERE uploaded_by = ?");
 $stmt->execute([$user_id]);
 $books = $stmt->fetchAll(PDO::FETCH_ASSOC);

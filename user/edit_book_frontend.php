@@ -6,7 +6,7 @@ require '../includes/header.php';
 
 // Validate Book ID
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    die('❌ Invalid Book ID');
+    die('❌ Invalid Book ID'); // If the book ID is invalid, the script stops execution and displays an error message.
 }
 
 $book_id = intval($_GET['id']);
@@ -41,9 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pages = intval($_POST['pages']);
 
     // Handle File Uploads
+    // Keep the existing paths if no new file is uploaded
     $book_file_path = $book['book_file'];
     $book_image_path = $book['book_image'];
 
+    // If a new book file or image is uploaded, it replaces the existing one.
+    // If no new file is uploaded, the existing file paths are retained.
     if (!empty($_FILES['book_file']['name'])) {
         $uploads_dir_books = __DIR__ . '/../assets/uploads/books/';
         $book_file_path = 'assets/uploads/books/' . basename($_FILES['book_file']['name']);
@@ -63,9 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         WHERE id = ?
     ");
     $stmt->execute([
-        $title, $author, $description, $price,
-        $category, $language, $pages,
-        $book_file_path, $book_image_path,
+        $title,
+        $author,
+        $description,
+        $price,
+        $category,
+        $language,
+        $pages,
+        $book_file_path,
+        $book_image_path,
         $book_id
     ]);
 
@@ -84,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -92,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="../assets/css/user/edit_book.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
         <h2>✏️ Edit Book</h2>
@@ -134,4 +145,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <a href="<?= $user_role === 'admin' ? '../admin/manage_books_frontend.php' : 'my_books_frontend.php' ?>" class="back-link">⬅️ Back</a>
     </div>
 </body>
+
 </html>
