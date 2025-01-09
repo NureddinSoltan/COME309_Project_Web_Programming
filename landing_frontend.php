@@ -1,21 +1,25 @@
 <?php
-
 require 'includes/auth.php';
 require 'includes/db.php';
 require 'includes/header.php';
 
+// Redirect if Not Logged In.
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
 
+// Retrieve search and filter parameters from the URL
 $search = $_GET['search'] ?? '';
 $category = $_GET['category'] ?? '';
 $language = $_GET['language'] ?? '';
 
+// Fetch distinct categories and languages from the database
 $categories = $conn->query("SELECT DISTINCT category FROM books WHERE status = 'approved'")->fetchAll(PDO::FETCH_COLUMN);
 $languages = $conn->query("SELECT DISTINCT language FROM books WHERE status = 'approved'")->fetchAll(PDO::FETCH_COLUMN);
 
+
+// Build and execute the query.
 $query = "SELECT * FROM books WHERE status = 'approved'";
 $params = [];
 
@@ -42,6 +46,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,6 +56,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="assets/css/includes/header.css">
 
 </head>
+
 <body>
 
 
@@ -65,19 +71,19 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="search-group">
                     <div class="search-input-wrapper">
                         <i class="fas fa-search"></i>
-                        <input type="text" 
-                               name="search" 
-                               placeholder="Search by Title or Author" 
-                               value="<?= htmlspecialchars($search) ?>"
-                               class="search-input">
+                        <input type="text"
+                            name="search"
+                            placeholder="Search by Title or Author"
+                            value="<?= htmlspecialchars($search) ?>"
+                            class="search-input">
                     </div>
 
                     <div class="filter-group">
                         <select name="category" class="filter-select">
                             <option value="">All Categories</option>
                             <?php foreach ($categories as $cat): ?>
-                                <option value="<?= htmlspecialchars($cat) ?>" 
-                                        <?= $category == $cat ? 'selected' : '' ?>>
+                                <option value="<?= htmlspecialchars($cat) ?>"
+                                    <?= $category == $cat ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($cat) ?>
                                 </option>
                             <?php endforeach; ?>
@@ -86,8 +92,8 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <select name="language" class="filter-select">
                             <option value="">All Languages</option>
                             <?php foreach ($languages as $lang): ?>
-                                <option value="<?= htmlspecialchars($lang) ?>" 
-                                        <?= $language == $lang ? 'selected' : '' ?>>
+                                <option value="<?= htmlspecialchars($lang) ?>"
+                                    <?= $language == $lang ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($lang) ?>
                                 </option>
                             <?php endforeach; ?>
@@ -112,8 +118,8 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php foreach ($books as $book): ?>
                         <article class="book-card">
                             <div class="book-cover">
-                                <img src="<?= htmlspecialchars($book['book_image']) ?>" 
-                                     alt="Cover of <?= htmlspecialchars($book['title']) ?>">
+                                <img src="<?= htmlspecialchars($book['book_image']) ?>"
+                                    alt="Cover of <?= htmlspecialchars($book['title']) ?>">
                             </div>
                             <div class="book-info">
                                 <h3 class="book-title"><?= htmlspecialchars($book['title']) ?></h3>
@@ -147,4 +153,5 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </section>
     </div>
 </body>
+
 </html>

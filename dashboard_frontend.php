@@ -5,10 +5,11 @@ require 'includes/header.php';
 
 // Admin Stats
 if ($_SESSION['user_role'] === 'admin') {
-    $total_users = $conn->query("SELECT COUNT(*) FROM users")->fetchColumn();
-    $total_books = $conn->query("SELECT COUNT(*) FROM books")->fetchColumn();
-    $pending_books = $conn->query("SELECT COUNT(*) FROM books WHERE status = 'pending'")->fetchColumn();
-    $approved_books = $conn->query("SELECT COUNT(*) FROM books WHERE status = 'approved'")->fetchColumn();
+    $total_users = $conn->query("SELECT COUNT(*) FROM users")->fetchColumn(); // Total Users:
+    $total_books = $conn->query("SELECT COUNT(*) FROM books")->fetchColumn(); // Total Books
+    $pending_books = $conn->query("SELECT COUNT(*) FROM books WHERE status = 'pending'")->fetchColumn(); // Pending Books
+    $approved_books = $conn->query("SELECT COUNT(*) FROM books WHERE status = 'approved'")->fetchColumn(); // Approved Books
+    $rejected_books = $conn->query("SELECT COUNT(*) FROM books WHERE status = 'rejected'")->fetchColumn(); // Rejected Books: 
 }
 ?>
 
@@ -57,7 +58,6 @@ if ($_SESSION['user_role'] === 'admin') {
                     <p class="stat-number"><?= $approved_books ?></p>
                 </div>
                 <?php
-                $rejected_books = $conn->query("SELECT COUNT(*) FROM books WHERE status = 'rejected'")->fetchColumn();
                 ?>
                 <div class="stat-card rejected">
                     <i class="fas fa-times-circle"></i>
