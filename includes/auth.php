@@ -6,4 +6,5 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
+//TODO: solve the redirection from the admin and user
 ?>
