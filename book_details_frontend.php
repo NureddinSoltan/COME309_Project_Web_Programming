@@ -8,18 +8,19 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
     die('❌ Invalid Book ID');
 }
 
-$book_id = $_GET['id'];
+$book_id = $_GET['id']; // Get the book ID from the URL
 
-// Fetch Book Details
+// Fetch book details from the database
 $stmt = $conn->prepare("SELECT * FROM books WHERE id = ?");
 $stmt->execute([$book_id]);
 $book = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// Stops execution if the book is not found.
 if (!$book) {
     die('❌ Book Not Found');
 }
 
-// Handle Comment Submission
+// Handle form submission for adding a comment
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment'])) {
     $comment = htmlspecialchars($_POST['comment']);
     $user_id = $_SESSION['user_id'];
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment'])) {
     }
 }
 
-// Fetch All Comments
+// Fetch all comments for the book
 $stmt = $conn->prepare("
     SELECT comments.comment, comments.created_at, users.username 
     FROM comments 
@@ -100,15 +101,15 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Add Comment Section -->
         <section class="comment-section">
-    <h3>💬 Add a Comment</h3>
-    <?php if (isset($_GET['comment']) && $_GET['comment'] === 'success'): ?>
-        <p style="color: green;">✅ Comment added successfully!</p>
-    <?php endif; ?>
-    <form method="POST" class="comment-form">
-        <textarea name="comment" placeholder="Write your comment here..." required></textarea><br>
-        <button type="submit">Add Comment</button>
-    </form>
-</section>
+            <h3>💬 Add a Comment</h3>
+            <?php if (isset($_GET['comment']) && $_GET['comment'] === 'success'): ?>
+                <p style="color: green;">✅ Comment added successfully!</p>
+            <?php endif; ?>
+            <form method="POST" class="comment-form">
+                <textarea name="comment" placeholder="Write your comment here..." required></textarea><br>
+                <button type="submit">Add Comment</button>
+            </form>
+        </section>
 
 
         <!-- Display Comments Section -->
