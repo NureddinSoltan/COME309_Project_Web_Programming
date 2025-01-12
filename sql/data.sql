@@ -6,11 +6,21 @@ INSERT INTO users (id, username, email, password, role) VALUES
 
 -- Books Table
 INSERT INTO books (id, title, author, description, price, category, language, pages, book_file, book_image, status, uploaded_by) VALUES
-(1, 'The Great Gatsby', 'F. Scott Fitzgerald', 'A classic novel set in the Jazz Age.', 10.99, 'Fiction', 'English', 180, 'assets/uploads/books/gatsby.pdf', 'assets/uploads/images/gatsby.jpg', 'approved', 1),
-(2, '1984', 'George Orwell', 'A dystopian novel about a totalitarian regime.', 12.99, 'Fiction', 'English', 328, 'assets/uploads/books/1984.pdf', 'assets/uploads/images/1984.jpg', 'approved', 2),
-(3, 'A Brief History of Time', 'Stephen Hawking', 'A popular science book on cosmology.', 15.99, 'Non-Fiction', 'English', 256, 'assets/uploads/books/history_of_time.pdf', 'assets/uploads/images/history_of_time.jpg', 'approved', 2)
-(4, 'To Kill a Mockingbird', 'Harper Lee', 'A novel about racial injustice in the Deep South.', 9.99, 'Fiction', 'English', 281, 'assets/uploads/books/mockingbird.pdf', 'assets/uploads/images/mockingbird.jpg', 'rejected', 3),
-(5, 'Sapiens: A Brief History of Humankind', 'Yuval Noah Harari', 'A book about the history of humanity.', 18.99, 'Non-Fiction', 'English', 412, 'assets/uploads/books/sapiens.pdf', 'assets/uploads/images/sapiens.jpg', 'pending', 3);
+-- Approved Books
+(1, 'Atomic Habits', 'James Clear', 'A guide to building good habits and breaking bad ones.', 16.99, 'Self-Help', 'English', 320, './assets/uploads/books/Atomic_habits.pdf', './assets/uploads/images/atomic-habits_-tiny-changes-remarkable-results-james-clear.jpg', 'approved', 2),
+(2, 'Getting Things Done', 'David Allen', 'The art of stress-free productivity.', 14.99, 'Self-Help', 'English', 267, './assets/uploads/books/getting-things-done-the-art-of-stress-free-productivity.pdf', './assets/uploads/images/getting-things-done-the-art-of-stress-free-productivit.jpg', 'approved', 3),
+(3, 'Pür-Dikkat', 'Cal Newport', 'Focus and deep work in a distracted world.', 13.99, 'Self-Help', 'Turkish', 288, './assets/uploads/books/Pür-dikkat.pdf', './assets/uploads/images/Pür-dikkat.jpeg', 'approved', 2),
+(4, 'الرحيق المختوم', 'صفي الرحمن المباركفوري', 'Biography of Prophet Muhammad (PBUH).', 10.99, 'Islamic Studies', 'Arabic', 340, './assets/uploads/books/الرحيق-المختوم.pdf', './assets/uploads/images/الرحيق-المختوم.jpg', 'approved', 2),
+(5, 'The Psychology of Money', 'Morgan Housel', 'Timeless lessons on wealth, greed, and happiness.', 18.99, 'Finance', 'English', 252, './assets/uploads/books/The_Psychology_of_Money.pdf', './assets/uploads/images/The_Psychology_of_Money.jpg', 'approved', 3),
+(6, 'العقيدة في ضوء الكتاب والسنة : 4 الرسل والرسالات', 'د. عمر سليمان الأشقر', 'Theology in light of the Quran and Sunnah.', 11.99, 'Islamic Studies', 'Arabic', 310, './assets/uploads/books/العقيدة-في-ضوء-الكتاب-والسنة-4-الرسل-والرسالات.pdf', './assets/uploads/images/العقيدة-في-ضوء-الكتاب-والسنة-4-الرسل-والرسالات.jpeg', 'approved', 3),
+(7, 'The 4-Hour Workweek', 'Tim Ferriss', 'Escape 9-5, live anywhere, and join the new rich.', 19.99, 'Self-Help', 'English', 308, './assets/uploads/books/the-4-hour-workweek.pdf', './assets/uploads/images/the-4-hour-workweek.jpg', 'approved', 2),
+
+-- Pending Book
+(8, 'The Millionaire Next Door', 'Thomas J. Stanley and William D. Danko', 'The surprising secrets of America’s wealthy.', 15.99, 'Finance', 'English', 275, './assets/uploads/books/The-Millionaire-Next-Door.pdf', './assets/uploads/images/The-Millionaire-Next-Door.jpg', 'pending', 3),
+
+-- Rejected Book
+(9, 'Your Money Or Your Life', 'Vicki Robin', 'Transform your relationship with money.', 17.99, 'Finance', 'English', 384, './assets/uploads/books/Your-Money-Or-Your-Life.pdf', './assets/uploads/images/Your-Money-Or-Your-Life.jpg', 'rejected', 3);
+
 -- Comments Table
 INSERT INTO comments (id, book_id, user_id, comment, created_at) VALUES
 (1, 1, 2, 'An incredible read! Highly recommend.', NOW()),
