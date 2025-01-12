@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment'])) {
             $stmt->execute([$book_id, $user_id, $comment]);
 
             // Redirect to avoid resubmission on page reload
-            header("Location: book_details_frontend.php?id=$book_id&comment=success");
+            header("Location: book_details.php?id=$book_id&comment=success");
             exit();
         } catch (PDOException $e) {
             echo "<p style='color: red;'>❌ Error: " . $e->getMessage() . "</p>";
@@ -132,7 +132,7 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Back to Books -->
         <div class="back-link">
-            <a href="books_frontend.php">
+            <a href="books.php">
                 ⬅️ Back to Books
             </a>
         </div>

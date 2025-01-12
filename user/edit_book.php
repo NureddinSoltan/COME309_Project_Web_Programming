@@ -82,9 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Redirect based on user role
     if ($user_role === 'admin') {
-        header('Location: ../admin/manage_books_frontend.php');
+        header('Location: ../admin/manage_books.php');
     } else {
-        header('Location: my_books_frontend.php');
+        header('Location: my_books.php');
     }
     exit();
 }
@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <button type="submit">💾 Save Changes</button>
         </form>
-        <a href="<?= $user_role === 'admin' ? '../admin/manage_books_frontend.php' : 'my_books_frontend.php' ?>" class="back-link">⬅️ Back</a>
+        <a href="<?= $user_role === 'admin' ? '../admin/manage_books.php' : 'my_books.php' ?>" class="back-link">⬅️ Back</a>
     </div>
 </body>
 

@@ -103,7 +103,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all users as an associative
             <?php endforeach; ?>
         </table>
 
-        <a href="../dashboard_frontend.php">⬅️ Back to Dashboard</a>
+        <a href="../dashboard.php">⬅️ Back to Dashboard</a>
 </body>
 
 </html>

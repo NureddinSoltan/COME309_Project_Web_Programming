@@ -6,7 +6,7 @@ $base_url = (strpos($_SERVER['REQUEST_URI'], '/admin/') !== false) ? '../' : $ba
 
 <nav class="navbar">
     <div class="nav-brand">
-        <a href="<?= $base_url ?>landing_frontend.php">
+        <a href="<?= $base_url ?>landing.php">
             <i class="fas fa-book-reader"></i>
             <span>Library System</span>
         </a>
@@ -15,20 +15,20 @@ $base_url = (strpos($_SERVER['REQUEST_URI'], '/admin/') !== false) ? '../' : $ba
         <?php if (isset($_SESSION['username'])): ?>
             <span>Welcome, <?= htmlspecialchars($_SESSION['username']) ?></span>
             <?php if ($_SESSION['user_role'] === 'admin'): ?>
-                <a href="<?= $base_url ?>dashboard_frontend.php" class="nav-btn">
+                <a href="<?= $base_url ?>dashboard.php" class="nav-btn">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </a>
-                <a href="<?= $base_url ?>admin/manage_books_frontend.php" class="nav-btn">
+                <a href="<?= $base_url ?>admin/manage_books.php" class="nav-btn">
                     <i class="fas fa-book"></i> Manage Books
                 </a>
             <?php else: ?>
-                <a href="<?= $base_url ?>dashboard_frontend.php" class="nav-btn">
+                <a href="<?= $base_url ?>dashboard.php" class="nav-btn">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </a>
-                <a href="<?= $base_url ?>user/upload_book_frontend.php" class="nav-btn">
+                <a href="<?= $base_url ?>user/upload_book.php" class="nav-btn">
                     <i class="fas fa-upload"></i> Upload Books
                 </a>
-                <a href="<?= $base_url ?>user/my_books_frontend.php" class="nav-btn">
+                <a href="<?= $base_url ?>user/my_books.php" class="nav-btn">
                     <i class="fas fa-book"></i> My Books
                 </a>
             <?php endif; ?>

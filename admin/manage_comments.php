@@ -74,7 +74,7 @@ if (isset($_POST['delete_comment'])) {
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <a href="../dashboard_frontend.php" class="back-link">⬅️ Back to Dashboard</a>
+        <a href="../dashboard.php" class="back-link">⬅️ Back to Dashboard</a>
     </div>
 </body>
 

@@ -105,7 +105,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <button type="submit" class="search-button">
                         <i class="fas fa-search"></i> Search
                     </button>
-                    <a href="landing_frontend.php" class="clear-button">
+                    <a href="landing.php" class="clear-button">
                         <i class="fas fa-times"></i> Clear
                     </a>
                 </div>
@@ -137,7 +137,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <?= htmlspecialchars($book['language']) ?>
                                     </p>
                                 </div>
-                                <a href="book_details_frontend.php?id=<?= $book['id'] ?>" class="view-details-btn">
+                                <a href="book_details.php?id=<?= $book['id'] ?>" class="view-details-btn">
                                     <i class="fas fa-info-circle"></i> View Details
                                 </a>
                             </div>

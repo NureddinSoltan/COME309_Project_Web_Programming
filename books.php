@@ -128,7 +128,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <input type="number" name="max_price" placeholder="Max Price" value="<?= htmlspecialchars($max_price) ?>">
 
             <button type="submit">🔍 Search</button>
-            <a href="books_frontend.php"><button type="button">Clear</button></a>
+            <a href="books.php"><button type="button">Clear</button></a>
         </form>
 
         <!-- Display Books -->
@@ -158,7 +158,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </tr>
             <?php endif; ?>
         </table>
-        <a href="dashboard_frontend.php">⬅️ Back to Dashboard</a>
+        <a href="dashboard.php">⬅️ Back to Dashboard</a>
 </body>
 
 </html>

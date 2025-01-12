@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['username'] = $user['username'];
         
         echo "✅ Login successful! Redirecting...";
-        header('Refresh: 2; URL=dashboard_frontend.php'); // Redirect the user to the dashboard after 2 seconds
+        header('Refresh: 2; URL=dashboard.php'); // Redirect the user to the dashboard after 2 seconds
     } else {
         echo "❌ Invalid email or password!";
     }

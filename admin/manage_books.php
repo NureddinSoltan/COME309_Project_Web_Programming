@@ -91,7 +91,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </tr>
             <?php foreach ($books as $book): ?>
                 <tr>
-                    <td><a href="../book_details_frontend.php?id=<?= $book['id'] ?>"><?= htmlspecialchars($book['title']) ?></a></td>
+                    <td><a href="../book_details.php?id=<?= $book['id'] ?>"><?= htmlspecialchars($book['title']) ?></a></td>
                     <td><?= htmlspecialchars($book['author']) ?></td>
                     <td><?= htmlspecialchars($book['category']) ?></td>
                     <td><?= htmlspecialchars($book['language']) ?></td>
@@ -129,7 +129,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php endforeach; ?>
         </table>
     </div>
-    <a href="../dashboard_frontend.php" class="back-link">⬅️ Back to Dashboard</a>
+    <a href="../dashboard.php" class="back-link">⬅️ Back to Dashboard</a>
 </body>
 
 </html>

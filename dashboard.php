@@ -69,23 +69,23 @@ if ($_SESSION['user_role'] === 'admin') {
             <section class="admin-actions">
                 <h2>Management Tools</h2>
                 <div class="action-grid">
-                    <a href="admin/manage_users_frontend.php" class="action-card">
+                    <a href="admin/manage_users.php" class="action-card">
                         <i class="fas fa-users-cog"></i>
                         <span>Manage Users</span>
                     </a>
-                    <a href="admin/pending_books_frontend.php" class="action-card">
+                    <a href="admin/pending_books.php" class="action-card">
                         <i class="fas fa-tasks"></i>
                         <span>Pending Books</span>
                     </a>
-                    <a href="admin/manage_comments_frontend.php" class="action-card">
+                    <a href="admin/manage_comments.php" class="action-card">
                         <i class="fas fa-comments"></i>
                         <span>Manage Comments</span>
                     </a>
-                    <a href="admin/manage_books_frontend.php" class="action-card">
+                    <a href="admin/manage_books.php" class="action-card">
                     <i class="fa-solid fa-book"></i>
                         <span>Manage Books</span>
                     </a>
-                    <a href="books_frontend.php" class="action-card">
+                    <a href="books.php" class="action-card">
                     <i class="fas fa-search"></i>
                         <span>Browse Books</span>
                     </a>
@@ -100,15 +100,15 @@ if ($_SESSION['user_role'] === 'admin') {
 
             <section class="user-actions">
                 <div class="action-grid">
-                    <a href="user/my_books_frontend.php" class="action-card">
+                    <a href="user/my_books.php" class="action-card">
                         <i class="fa-solid fa-book"></i>
                         <span>My Books</span>
                     </a>
-                    <a href="user/upload_book_frontend.php" class="action-card">
+                    <a href="user/upload_book.php" class="action-card">
                         <i class="fas fa-upload"></i>
                         <span>Upload New Book</span>
                     </a>
-                    <a href="books_frontend.php" class="action-card">
+                    <a href="books.php" class="action-card">
                         <i class="fas fa-search"></i>
                         <span>Browse Books</span>
                     </a>
