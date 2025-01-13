@@ -14,7 +14,7 @@ Ensure the following tools are installed on your system:
 
 1. Clone the repository using Git:
    ```bash
-   git clone https://github.com/your-username/library-management-system.git
+   git clone https://github.com/NureddinSoltan/COME309_Project_Web_Programming.git
    ```
 2. Alternatively, download the project as a ZIP file from the repository and extract it.
 
