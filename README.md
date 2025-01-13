@@ -1,7 +1,7 @@
 # Library Management System
 
 ## Browser the website live via:
-[Click here to visit the website](http://lms-come309.wuaze.com/index.php?i=1)
+<a href="http://lms-come309.wuaze.com/index.php?i=1" target="_blank">http://lms-come309.wuaze.com/index.php?i=1</a>
 
 ## Prerequisites
 
