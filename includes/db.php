@@ -1,8 +1,8 @@
 <?php
-$host = "localhost";
-$user = "root";
-$password = "";
-$dbname = "library_db";
+$host = "localhost"; // Hostname
+$user = "root"; // Username
+$password = ""; // Password (leave empty for XAMPP)
+$dbname = "library_db"; // Database name
 
 // Use a try-catch block to handle potential connection errors
 try {
