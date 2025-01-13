@@ -1,5 +1,8 @@
 # Library Management System
 
+## Browser the website live via:
+http://lms-come309.wuaze.com/index.php?i=1
+
 ## Prerequisites
 
 Ensure the following tools are installed on your system:
